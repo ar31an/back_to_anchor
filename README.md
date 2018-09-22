@@ -1,6 +1,14 @@
 # BackToAnchor
 
-An Alternative to link_to :back that also allows the anchor to be passed along with the URL.
+An Alternative to (link_to :back) that also allows the anchor to be passed along with the URL.
+
+# When should you use it
+
+Lets say you have a long page with lots of information and the user scrolls down to some element on the page, and then clicks on a link to navigate to a new page.
+
+Now, on this page you have a (link_to :back) which will take user back to the previous page. But, in doing so the user will be redirected to the start of the page instead. Wouldn't it be better, if the user was scrolled to the same element from where they navigated to the new page?
+
+That's where this gem comes in handy, as the user will be redirected to the page along with anchor so the page scrolls down to specific element automatically.
 
 ## Installation
 
@@ -20,24 +28,25 @@ Or install it yourself as:
 
 ## Usage
 
-First, pass the named anchor as a param to the new page from old page:
-
-Old Page:
-`https://example.org/old-page`
-
-New Page:
-`https://example.org/new-page?to_anchor=div_id_123`
-
-
-And then, just add this line to new page to redirect users to old page with anchor:
+Just pass the param (to_anchor) from the page where you want the user to be redirected back and scrolled down to specific element. e.g.
 
 ```ruby
-= link_to 'Go back to previous page with anchor', :back_to_anchor
+= link_to 'New Page', new_page_path(to_anchor: 'div_id_123')
+```
+
+And then, just add this link to the New Page:
+
+```ruby
+= link_to 'Go back to previous page', :back_to_anchor
 ```
 
 Which in turn would generate the following URL:
-`https://example.org/old-page#div_id_123`
 
+```ruby
+https://example.org/previous-page#div_id_123`
+```
+
+That's all :-)
 
 ## Development
 
